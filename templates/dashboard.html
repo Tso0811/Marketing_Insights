@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marketing Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; max-width: 800px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #e0e0e0; color: #333; }
+        .btn { display: inline-block; padding: 8px 12px; margin: 5px; text-decoration: none; color: white; border-radius: 4px; }
+        .btn-create { background-color: #FF9800; } /* 橙色：創建 */
+        .btn-simulate { background-color: #2196F3; } /* 藍色：模擬點擊 */
+        .btn-edit { background-color: #4CAF50; } /* 綠色：編輯 */
+        .btn-delete { background-color: #f44336; } /* 紅色：刪除 */
+        .btn-logout { background-color: #666; } /* 灰色：登出 */
+        h1 { color: #333; }
+        @media (max-width: 600px) { table, th, td { font-size: 14px; } }
+    </style>
+</head>
+<body>
+    <h1>Marketing Campaigns</h1>
+    <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a></p>
+    <a href="{% url 'campaign_create' %}" class="btn btn-create">Create New Campaign</a>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>Budget</th>
+            <th>Click Count</th>
+            <th>Actions</th>
+        </tr>
+        {% for campaign in campaigns %}
+        <tr>
+            <td>{{ campaign.name }}</td>
+            <td>{{ campaign.start_date }}</td>
+            <td>{{ campaign.budget }}</td>
+            <td>
+                {% for s in summary %}
+                    {% if s.campaign_id == campaign.id %}
+                        {{ s.click_count }}
+                    {% endif %}
+                {% empty %}
+                    0
+                {% endfor %}
+            </td>
+            <td>
+                <a href="{% url 'simulate_click' campaign.id %}" class="btn btn-simulate">Simulate Click</a>
+                <a href="{% url 'campaign_edit' campaign.id %}" class="btn btn-edit">Edit</a>
+                <a href="{% url 'campaign_delete' campaign.id %}" class="btn btn-delete">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No campaigns found. Create one to start!</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

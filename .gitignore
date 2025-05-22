@@ -1,0 +1,30 @@
+# Python 相關
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+
+# Django 相關
+*.log
+*.pot
+*.sqlite3  # 如果你使用 SQLite 資料庫
+migrations/  # 通常不追踪 migrations 檔案，除非你確定需要
+
+# 環境相關
+.env  # 如果你有環境變量檔案
+venv/  # 你的虛擬環境資料夾（名稱可能不同，例如 virtualenv/）
+*.env
+
+# 編輯器或系統生成的檔案
+.DS_Store  # 如果你在 macOS 上也操作過
+*.swp
+*.swo
+
+# Windows 特定
+Thumbs.db  # Windows 縮圖檔案
+Desktop.ini  # Windows 桌面設定檔案
+
+# 其他
+/staticfiles/  # 如果你有收集的靜態檔案
+/media/  # 如果你有上傳的媒體檔案

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Campaign</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .form-container { max-width: 500px; }
+        p { color: #333; }
+        button { padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #d32f2f; }
+        a { color: #2196F3; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        h1 { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Delete Campaign</h1>
+    <div class="form-container">
+        <p>Are you sure you want to delete "{{ campaign.name }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Confirm Delete</button>
+        </form>
+        <a href="{% url 'dashboard' %}">Cancel</a>
+    </div>
+</body>
+</html>
