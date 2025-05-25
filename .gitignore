@@ -28,3 +28,4 @@ Desktop.ini  # Windows 桌面設定檔案
 # 其他
 /staticfiles/  # 如果你有收集的靜態檔案
 /media/  # 如果你有上傳的媒體檔案
+

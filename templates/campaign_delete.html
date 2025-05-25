@@ -21,7 +21,7 @@
             {% csrf_token %}
             <button type="submit">Confirm Delete</button>
         </form>
-        <a href="{% url 'dashboard' %}">Cancel</a>
+        <a href="{% url 'dashboard:show_campaigns' %}">Cancel</a>
     </div>
 </body>
 </html>
