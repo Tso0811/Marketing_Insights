@@ -27,6 +27,7 @@ def edit_campaigns(request , id):
 
     return render(request, 'campaign_form.html', {'campaign': campaign})
 
+@login_required
 def campaign_create(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -40,9 +41,17 @@ def campaign_create(request):
 
     return render(request , 'campaign_form.html')
 
+@login_required
 def campaign_delete (request , id):
     campaign = get_object_or_404(Campaigns , pk=id)
     if request.method == 'POST':
         campaign.delete()
         return redirect('dashboard:show_campaigns')
     return render(request , 'campaign_delete.html' , {'campaign':campaign})
+
+@login_required
+def campaign_click (request , id):
+    campaign = get_object_or_404(Campaigns , pk = id)
+    campaign.click += 1
+    campaign.save()
+    return redirect('dashboard:show_campaigns')

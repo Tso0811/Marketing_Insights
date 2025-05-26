@@ -34,17 +34,10 @@
             <td>{{ campaign.name }}</td>
             <td>{{ campaign.start_date }}</td>
             <td>{{ campaign.budget }}</td>
+            <td>{{ campaign.click }}</td>
+
             <td>
-                {% for s in summary %}
-                    {% if s.campaign_id == campaign.id %}
-                        {{ s.click_count }}
-                    {% endif %}
-                {% empty %}
-                    0
-                {% endfor %}
-            </td>
-            <td>
-                <a href="" class="btn btn-simulate">Simulate Click</a>
+                <a href="{% url 'dashboard:campaign_click' campaign.id %}" class="btn btn-simulate">Simulate Click</a>
                 <a href="{% url 'dashboard:campaign_edit' campaign.id %}" class="btn btn-edit">Edit</a>
                 <a href="{% url 'dashboard:campaign_delete' campaign.id %}" class="btn btn-delete">Delete</a>
             </td>
