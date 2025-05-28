@@ -15,6 +15,9 @@
         .btn-logout { background-color: #666; } /* 灰色：登出 */
         .btn-register { background-color: #9c27b0; } /* 紫色：註冊 */
         h1 { color: #333; }
+        .btn-login {
+    background-color: #3f51b5;  /* 深藍色 */
+}
         @media (max-width: 600px) { table, th, td { font-size: 14px; } }
     </style>
 </head>
@@ -23,7 +26,7 @@
     {% if user.is_authenticated %}
         <p>Welcome, {{ user.username }}! <a href="{% url 'user:logout_view' %}" class="btn btn-logout">Logout</a></p>
     {% else %}
-        <p><a href="" class="btn btn-login">Login</a> <a href="" class="btn btn-register">Register</a></p>
+        <p><a href="{% url 'user:login_view' %}" class="btn btn-login">login</a> <a href="{% url 'user:register_view' %}" class="btn btn-register">Register</a></p>
     {% endif %}
     <a href="{% url 'dashboard:campaign_create' %}" class="btn btn-create">Create New Campaign</a>
     <table>

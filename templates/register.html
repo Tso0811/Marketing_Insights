@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .form-container { max-width: 300px; margin: 0 auto; }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
         input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        button { padding: 10px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background-color: #45a049; }
+        button { padding: 10px 15px; background-color: #9c27b0; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #7b1fa2; }
         h1 { color: #333; text-align: center; }
         .error { color: #f44336; font-size: 14px; margin-top: 5px; }
         @media (max-width: 600px) {
@@ -19,24 +19,34 @@
     </style>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Register</h1>
     <div class="form-container">
-        <form method="post" action="{% url 'user:login_view' %}">
+        <form method="post" action="{% url 'user:register_view' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
-           
+                {% if errors.username %}
+                    <div class="error">{{ errors.username }}</div>
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-              
+                {% if errors.password %}
+                    <div class="error">{{ errors.password }}</div>
+                {% endif %}
             </div>
-            <button type="submit">Login</button>
-            <p><a href="{% url 'user:register_view' %}">Register</a></p>
-
+            <div class="form-group">
+                <label for="password_confirm">Confirm Password:</label>
+                <input type="password" id="password_confirm" name="password_confirm" required>
+                {% if errors.password_confirm %}
+                    <div class="error">{{ errors.password_confirm }}</div>
+                {% endif %}
+            </div>
+            <button type="submit">Register</button>
         </form>
+        <p><a href="{% url 'user:login_view' %}">Back to Login</a></p>
     </div>
 </body>
 </html>
