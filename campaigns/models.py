@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -8,6 +9,7 @@ class Campaigns(models.Model):
     budget = models.IntegerField()
     click = models.IntegerField(default=0)
 
+    poster = models.ForeignKey(User , on_delete=models.CASCADE)
     def __str__(self):
         return (self.name)
     

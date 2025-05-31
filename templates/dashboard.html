@@ -36,6 +36,7 @@
             <th>Budget</th>
             <th>Click Count</th>
             <th>Actions</th>
+            <th>Poster</th>
         </tr>
         {% for campaign in campaigns %}
         <tr>
@@ -48,6 +49,7 @@
                 <a href="{% url 'dashboard:campaign_edit' campaign.id %}" class="btn btn-edit">Edit</a>
                 <a href="{% url 'dashboard:campaign_delete' campaign.id %}" class="btn btn-delete">Delete</a>
             </td>
+            <td>{{ campaign.poster }}</td>
         </tr>
         {% empty %}
         <tr><td colspan="5">No campaigns found. Create one to start!</td></tr>
