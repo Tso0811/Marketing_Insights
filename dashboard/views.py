@@ -5,7 +5,8 @@ from django.shortcuts import get_object_or_404 ,redirect
 
 from .serializers import CampaignsSerializer
 from rest_framework import viewsets
-# Create your views here.
+from rest_framework.permissions import IsAuthenticated #加入授權功能
+
 
 def show_campaigns(request):    #直接在dashboard中顯示 不需要點擊進入細節
     campaign = Campaigns.objects.all()
@@ -61,3 +62,4 @@ def campaign_click (request , id):
 class campaign_viewsets(viewsets.ModelViewSet):
     queryset = Campaigns.objects.all()
     serializer_class = CampaignsSerializer
+    permission_classes = (IsAuthenticated,)

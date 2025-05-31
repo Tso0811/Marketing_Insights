@@ -11,6 +11,7 @@ urlpatterns = [
     path('dashboard/' , include('dashboard.urls')),
     path('user/', include('user.urls')),
     path('api/', include('dashboard.urls')),
+    path('api-auth/', include('rest_framework.urls'))
 ]
 
 if settings.DEBUG:
