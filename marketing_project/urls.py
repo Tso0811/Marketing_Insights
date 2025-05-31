@@ -10,7 +10,7 @@ urlpatterns = [
     path('campaigns/' , include('campaigns.urls')),
     path('dashboard/' , include('dashboard.urls')),
     path('user/', include('user.urls')),
-    path('api/', include('dashboard.urls')),
+    path('api/', include('dashboard.api_urls')),
     path('api-auth/', include('rest_framework.urls'))
 ]
 
