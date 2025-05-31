@@ -36,8 +36,9 @@ def campaign_create(request):
         name = request.POST.get('name')
         start_date = request.POST.get('start_date')
         budget = request.POST.get('budget')
+        poster = request.user
 
-        new_campaign = Campaigns(name=name , start_date=start_date , budget=budget)
+        new_campaign = Campaigns(name=name , start_date=start_date , budget=budget , poster=poster)
         new_campaign.save()
 
         return redirect('dashboard:show_campaigns')
