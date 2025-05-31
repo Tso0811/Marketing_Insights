@@ -3,6 +3,8 @@ from campaigns.models import Campaigns
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404 ,redirect
 
+from .serializers import CampaignsSerializer
+from rest_framework import viewsets
 # Create your views here.
 
 def show_campaigns(request):    #直接在dashboard中顯示 不需要點擊進入細節
@@ -55,3 +57,7 @@ def campaign_click (request , id):
     campaign.click += 1
     campaign.save()
     return redirect('dashboard:show_campaigns')
+
+class campaign_viewsets(viewsets.ModelViewSet):
+    queryset = Campaigns.objects.all()
+    serializer_class = CampaignsSerializer

@@ -10,6 +10,7 @@ urlpatterns = [
     path('campaigns/' , include('campaigns.urls')),
     path('dashboard/' , include('dashboard.urls')),
     path('user/', include('user.urls')),
+    path('api/', include('dashboard.urls')),
 ]
 
 if settings.DEBUG:

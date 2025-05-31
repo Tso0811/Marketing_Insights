@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'campaigns',
     'dashboard',
     'user',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
