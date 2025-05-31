@@ -8,7 +8,7 @@ __pycache__/
 # Django 相關
 *.log
 *.pot
-*.sqlite3  # 如果你使用 SQLite 資料庫
+*.sqlite3
 migrations/  # 通常不追踪 migrations 檔案，除非你確定需要
 
 # 環境相關
