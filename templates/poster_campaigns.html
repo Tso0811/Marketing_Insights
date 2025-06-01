@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Campaigns by {{ poster.username }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; max-width: 800px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #e0e0e0; color: #333; }
+        .btn { display: inline-block; padding: 8px 12px; margin: 5px; text-decoration: none; color: white; border-radius: 4px; }
+        .btn-back { background-color: #666; }
+        .btn-back:hover { background-color: #555; }
+        h1 { color: #333; }
+        @media (max-width: 600px) { table, th, td { font-size: 14px; } }
+    </style>
+</head>
+<body>
+    <h1>Campaigns by {{ poster.username }}</h1>
+    <a href='' class="btn btn-back">Back to Dashboard</a>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>Budget</th>
+            <th>Click Count</th>
+        </tr>
+        {% for campaign in campaigns %}
+        <tr>
+            <td>{{ campaign.name }}</td>
+            <td>{{ campaign.start_date }}</td>
+            <td>{{ campaign.budget }}</td>
+            <td>{{ campaign.click }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No campaigns found for this user.</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
