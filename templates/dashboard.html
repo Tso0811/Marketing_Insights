@@ -3,25 +3,34 @@
 <head>
     <title>Marketing Dashboard</title>
     <style>
+        /* 你的 CSS 樣式保持不變 */
         body { font-family: Arial, sans-serif; margin: 20px; }
         table { border-collapse: collapse; width: 100%; max-width: 800px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #e0e0e0; color: #333; }
         .btn { display: inline-block; padding: 8px 12px; margin: 5px; text-decoration: none; color: white; border-radius: 4px; }
-        .btn-create { background-color: #FF9800; } /* 橙色：創建 */
-        .btn-simulate { background-color: #2196F3; } /* 藍色：模擬點擊 */
-        .btn-edit { background-color: #4CAF50; } /* 綠色：編輯 */
-        .btn-delete { background-color: #f44336; } /* 紅色：刪除 */
-        .btn-logout { background-color: #666; } /* 灰色：登出 */
-        .btn-register { background-color: #9c27b0; } /* 紫色：註冊 */
+        .btn-create { background-color: #FF9800; }
+        .btn-simulate { background-color: #2196F3; }
+        .btn-edit { background-color: #4CAF50; }
+        .btn-delete { background-color: #f44336; }
+        .btn-logout { background-color: #666; }
+        .btn-register { background-color: #9c27b0; }
         h1 { color: #333; }
-        .btn-login {
-    background-color: #3f51b5;  /* 深藍色 */
-}
+        .btn-login { background-color: #3f51b5; }
         @media (max-width: 600px) { table, th, td { font-size: 14px; } }
     </style>
 </head>
 <body>
+
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            alert("{{ message|escapejs }}");
+        {% endfor %}
+    </script>
+    {% endif %}
+
+
     <h1>Marketing Campaigns</h1>
     {% if user.is_authenticated %}
         <p>Welcome, {{ user.username }}! <a href="{% url 'user:logout_view' %}" class="btn btn-logout">Logout</a></p>
