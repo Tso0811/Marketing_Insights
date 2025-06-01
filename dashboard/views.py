@@ -3,6 +3,8 @@ from campaigns.models import Campaigns
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404 ,redirect
 from django.contrib import messages
+from django.contrib.auth.models import User
+
 
 from .serializers import CampaignsSerializer
 from rest_framework import viewsets
@@ -69,12 +71,23 @@ def campaign_delete (request , id):
 
 @login_required
 def campaign_click (request , id):
-    campaign = get_object_or_404(Campaigns , pk = id)
+    campaign = get_object_or_404(Campaigns , pk=id)
     campaign.click += 1
     campaign.save()
     return redirect('dashboard:show_campaigns')
+
+def postercampaigns(request , poster):
+    user = get_object_or_404(User , username=poster)
+    campaigns = Campaigns.objects.filter(poster=user)
+    return render(request , 'poster_campaigns.html' , {
+        'campaigns':campaigns,
+        'poster': user
+    })
+
 
 class campaign_viewsets(viewsets.ModelViewSet):
     queryset = Campaigns.objects.all()
     serializer_class = CampaignsSerializer
     permission_classes = (IsAuthenticated,)
+
+

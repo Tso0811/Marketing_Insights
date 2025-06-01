@@ -15,8 +15,8 @@
     </style>
 </head>
 <body>
-    <h1>Campaigns by {{ poster.username }}</h1>
-    <a href='' class="btn btn-back">Back to Dashboard</a>
+    <h1>Campaigns by {{poster}}</h1>
+    <a href='{% url "dashboard:show_campaigns" %}' class="btn btn-back">Back to Dashboard</a>
     <table>
         <tr>
             <th>Name</th>
