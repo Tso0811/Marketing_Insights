@@ -31,6 +31,13 @@
                 {% endif %}
             </div>
             <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                {% if errors.email %}
+                    <div class="error">{{ errors.email }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
                 {% if errors.password %}

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+from decouple import config 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -130,3 +130,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGOUT_REDIRECT_URL = '/dashboard/'
 LOGIN_URL = '/user/login_view/'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_USER')       # 發信的帳號
+EMAIL_HOST_PASSWORD = config('EMAIL_PASS')    # Gmail應用程式密碼  這兩個欄位要從env載入避免寫在程式中
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

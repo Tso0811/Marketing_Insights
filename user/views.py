@@ -2,7 +2,8 @@ from django.contrib.auth import logout , authenticate , login
 from django.shortcuts import redirect , render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 
@@ -36,7 +37,7 @@ def register_view(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         password_confirm = request.POST.get('password_confirm')
-
+        email = request.POST.get('email')
         if password != password_confirm :
             errors['password_confirm'] = '兩次密碼輸入不一樣'
 
@@ -44,7 +45,16 @@ def register_view(request):
             errors['username'] = '使用者名稱已存在'
         
         if not errors:
-            user = User.objects.create_user(username=username , password=password)
+            user = User.objects.create_user(username=username , password=password , email=email)
+            
+            send_mail(
+            subject='註冊成功',
+            message='您好，感謝您註冊成為我們的會員！',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user.email],
+            fail_silently=False,           
+            )
+            
             login(request , user)
             return redirect('dashboard:show_campaigns')
     return render(request , 'register.html' , {'errors':errors})
