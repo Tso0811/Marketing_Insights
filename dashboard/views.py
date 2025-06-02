@@ -10,6 +10,9 @@ from .serializers import CampaignsSerializer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated #加入授權功能
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 def show_campaigns(request):    #直接在dashboard中顯示 不需要點擊進入細節
     campaign = Campaigns.objects.all()
@@ -74,6 +77,17 @@ def campaign_click (request , id):
     campaign = get_object_or_404(Campaigns , pk=id)
     campaign.click += 1
     campaign.save()
+    
+    user = campaign.poster
+    if campaign.click>50 and (campaign.click % 50 == 0):
+        send_mail(
+                subject='活動通知',
+                message = f'您好，您的活動目前已經突破 {campaign.click} 人參加',
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[user.email],
+                fail_silently=False,           
+                )          
+
     return redirect('dashboard:show_campaigns')
 
 def postercampaigns(request , poster):
